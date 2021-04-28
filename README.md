@@ -31,7 +31,6 @@ This API comes with a default user account. The login credentials for this accou
 ## Routes
 
 ### Signup
----
 **URL**: `/auth/signup`  
 **Method**: `POST`  
 **Auth required**: No  
@@ -42,9 +41,8 @@ This API comes with a default user account. The login credentials for this accou
   "password": "admin"
 }
 ```
-
-### Signin
 ---
+### Signin
 **URL**: `/auth/signin`  
 **Method**: `POST`  
 **Auth required**: No  
@@ -55,9 +53,8 @@ This API comes with a default user account. The login credentials for this accou
   "password": "admin"
 }
 ```
-
-### Get your user
 ---
+### Get your user
 **URL**: `/users/me`  
 **Method**: `POST`  
 **Auth required**: Yes  
