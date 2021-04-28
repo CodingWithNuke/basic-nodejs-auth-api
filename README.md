@@ -56,5 +56,5 @@ This API comes with a default user account. The login credentials for this accou
 ---
 ### Get your user
 **URL**: `/users/me`  
-**Method**: `POST`  
+**Method**: `GET`  
 **Auth required**: Yes  
