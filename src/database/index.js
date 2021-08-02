@@ -10,7 +10,7 @@ db.users = new nedb({
     if (!err) {
       const userCount = await db.users.count({});
 
-      if (userCount < 1) {
+      if (!userCount) {
         await db.users.insert({
           username: 'admin',
           password: await hash('admin', 12)
