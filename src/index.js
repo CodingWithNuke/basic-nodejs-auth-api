@@ -1,34 +1,23 @@
-require('dotenv').config();
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 
-const helmet = require('helmet');
-const morgan = require('morgan');
-const cors = require('cors');
+const helmet = require("helmet");
+const morgan = require("morgan");
+const cors = require("cors");
 
 const app = express();
-app
-  .use(express.json())
-  .use(express.urlencoded({ extended: true }))
-  .use(helmet())
-  .use(morgan('dev'))
-  .use(cors())
 
-require('./routes')(app);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
+app.use(morgan("dev"));
+app.use(cors());
 
-app.use((req, res, next) => {
-  const error = new Error(`Not Found - ${req.originalUrl}`);
-  error.status = 404;
-  next(error);
-})
+require("./routes")(app);
 
-app.use((error, req, res, next) => {
-  res.status(error.status || res.statusCode !== 200 ? res.statusCode : 500);
-  return res.json({
-    error: true,
-    message: error.message
-  })
-})
-
+const { errorHandler, routeNotFound } = require("./middlewares");
+app.use(routeNotFound);
+app.use(errorHandler);
 
 const port = process.env.PORT || 8081;
-app.listen(port, () => console.log(`Server is running on port: ${port}`))
+app.listen(port, () => console.log(`Server is running on: http://localhost:${port}`));

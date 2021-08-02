@@ -3,8 +3,9 @@ const { Router } = require('express');
 const router = Router();
 
 const { UserCtrl } = require('../controllers');
-const { AuthMw } = require('../middlewares');
 
-router.get('/me', [AuthMw.verify], UserCtrl.findMe)
+const { isLoggedIn } = require('../middlewares');
+
+router.get('/me', [isLoggedIn], UserCtrl.findMe)
 
 module.exports = router;
