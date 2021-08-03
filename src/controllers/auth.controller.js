@@ -11,14 +11,16 @@ exports.signup = async (req, res, next) => {
     return next(new Error("User with that username already exists."));
   }
 
-  await db.users.insert({
+  const user = await db.users.insert({
     username,
     password: await hash(password, 12)
   });
+  delete user.password;
 
   res.status(201);
   return res.json({
-    message: "User created."
+    token: jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "7d" }),
+    user
   })
 }
 
